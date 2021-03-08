@@ -1,0 +1,4 @@
+[napari.plugin]
+napari_jroireader = napari_jroireader
+napari_jroiwriter = napari_jroiwriter
+

@@ -1,0 +1,10 @@
+Metadata-Version: 1.2
+Name: napari-jroitools
+Version: 0.0.1
+Summary: A plugin to read and write ImageJ roi files into a napari shapes or points layer.
+Home-page: https://github.com/jayunruh/napari_jroitools
+Author: Jay Unruh
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.6
