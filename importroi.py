@@ -367,17 +367,17 @@ class Roi():
         r=self.getBounds()
         xc=int(r[0]+r[2]/2)
         yc=int(r[1]+r[3]/2)
-        if(xc<0) xc=0
-        if(yc<0) yc=0
-        digit=4
+        if(xc<0): xc=0
+        if(yc<0): yc=0
+        digits=4
         xs=str(xc)
-        if(len(xs)>digits) digits=len(xs)
+        if(len(xs)>digits): digits=len(xs)
         ys=str(yc)
-        if(len(ys)>digits) digits=len(ys)
+        if(len(ys)>digits): digits=len(ys)
         xs="000000"+xs
         ys="000000"+ys
-        label=ys[-digits:]+'-'+xs[-digits]
-        if(self.posistion is not None):
+        label=ys[-digits:]+'-'+xs[-digits:]
+        if(self.position is not None):
             zc=0
             if(isinstance(self.position,list)):
                 zc=self.position[0]
