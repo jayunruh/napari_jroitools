@@ -13,13 +13,17 @@ def getParallelCoords(coords,distance):
     if(distance==0.0):
         return coords
     #first get the parallel coordinates
-    slope=(coords[3]-coords[1])/(coords[2]-coords[0])
-    #perpendicular slope
-    newslope=-1.0/slope
-    xinc=np.sqrt(1.0/(1.0+newslope*newslope))
-    yinc=newslope*xinc
-    if(coords[2]==coords[0]): xinc,yinc=1.0,0.0
-    if(coords[3]==coords[1]): xinc,yinc=0.0,1.0
+    if coords[2]==coords[0]:
+        xinc,yinc=1.0,0.0
+    elif coords[3]==coords[1]:
+        xinc,yinc=0.0,1.0
+    else:
+        slope=(coords[3]-coords[1])/(coords[2]-coords[0])
+        #perpendicular slope
+        newslope=-1.0/slope
+        xinc=np.sqrt(1.0/(1.0+newslope*newslope))
+        yinc=newslope*xinc
+
     newcoords=np.array([xinc,yinc,xinc,yinc])
     newcoords*=distance
     newcoords+=coords
