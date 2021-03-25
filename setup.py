@@ -12,7 +12,7 @@ def read(fname):
 
 setup(
     name='napari_jroitools',
-    version='0.0.2',
+    version='0.0.5',
     author='Jay Unruh',
     description='A plugin to read and write ImageJ roi files into a napari shapes or points layer.',
     url='https://github.com/jayunruh/napari_jroitools',
