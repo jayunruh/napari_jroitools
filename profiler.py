@@ -137,6 +137,8 @@ def getThickBeadLineProfile(gematrix,beadpos,linecoords,thickness):
     #this is the dot product with the line
     dists=((coords[2]-coords[0])*(beadpos[valid,0]-coords[0])+(coords[3]-coords[1])*(beadpos[valid,1]-coords[1]))/flinelength
     dists=np.floor(dists).astype(int)
+    #do a clip just to make sure we don't have any at the very end of the line
+    dists=dists.clip(0,linelength-1)
     #now add up the gematrix columns for each unit bin
     geprofile=np.zeros((linelength,gematrix.shape[0]),dtype=float)
     #will this work?
