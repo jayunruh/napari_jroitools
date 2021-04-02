@@ -13,7 +13,7 @@ def writePW4(path,xValues,yValues,xLabel='x',yLabel='y',limits=None,logs=None):
     #a more reasonable function name
     return imwrite(path,xValues,yValues,xLabel,yLabel,limits,logs)
 
-def imwrite(path,xValues,yValues,xLabel='x',yLabel='y',limits=None,logs=None):
+def pwwrite(path,xValues,yValues,xLabel='x',yLabel='y',limits=None,logs=None):
     f=open(path,'wb')
     writestring(f,'pw2_file_type')
     f.write(struct.pack('i',0))
