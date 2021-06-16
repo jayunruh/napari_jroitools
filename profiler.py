@@ -41,15 +41,15 @@ def interp2d(img,x,y):
     remx=x-prevx
     remx[prevx<0]=0.0
     prevx[prevx<0]=0
-    remx[prevx>=img.shape[1]]=1.0
-    prevx[prevx>=img.shape[1]]=img.shape[1]-1
+    remx[prevx>=(img.shape[1]-1)]=1.0
+    prevx[prevx>=(img.shape[1]-1)]=img.shape[1]-2
     nextx=prevx+1
     prevy=np.floor(y).astype(np.int32)
     remy=y-prevy
     remy[prevy<0]=0.0
     prevy[prevy<0]=0
-    remy[prevy>=img.shape[0]]=1.0
-    prevy[prevy>=img.shape[0]]=img.shape[0]-1
+    remy[prevy>=(img.shape[0]-1)]=1.0
+    prevy[prevy>=(img.shape[0]-1)]=img.shape[0]-2
     nexty=prevy+1
     #x1=img[prevy,prevx]*(1.0-remx)+remx*img[prevy,nextx]
     #x2=img[nexty,prevx]*(1.0-remx)+remx*img[nexty,nextx]
@@ -72,14 +72,17 @@ def interpLine(coords,linelength,img):
 #assume line is in single z plane
 #line coordinates are two sets of z,y,x
 @jit(nopython=True)
-def getThickLineProfile(img,linecoords,thickness):
+def getThickLineProfile(img,linecoords,thickness,zcoord1=None):
     #change coords to x1,y1,x2,y2
     coords=np.array([linecoords[0][2],linecoords[0][1],linecoords[1][2],linecoords[1][1]])
     print(coords)
     halfthick=thickness/2.0
     #get the imge plane of interest
-    zcoord=int(linecoords[0][0])
-    print(zcoord)
+    if(zcoord1 is not None):
+        zcoord=zcoord1
+    else:
+        zcoord=int(linecoords[0][0])
+    print("profile z plane:"+str(zcoord))
     img2d=img[zcoord,:,:]
     linelength=getLineLength(coords)
     avgline=interpLine(getParallelCoords(coords,-halfthick),linelength,img2d)
@@ -92,12 +95,11 @@ def getThickLineProfile(img,linecoords,thickness):
 
 #this version strings together several thick line profiles into a longer polyline profile
 #need to eliminate the end points for each segment (except the last) to avoid duplication
-@jit(nopython=True)
-def getThickPolylineProfile(img,linecoords,thickness):
+def getThickPolylineProfile(img,linecoords,thickness,zcoord1=None):
     npts=len(linecoords)
     profiles=[]
     for i in range(1,npts):
-        yvals=getThickLineProfile(img,linecoords[i-1:i+1],thickness)
+        yvals=getThickLineProfile(img,linecoords[i-1:i+1],thickness,zcoord1)
         if i==(npts-1):
             profiles.append(yvals)
         else:
