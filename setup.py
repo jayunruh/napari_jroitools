@@ -12,7 +12,7 @@ def read(fname):
 
 setup(
     name='napari_jroitools',
-    version='0.0.12',
+    version='0.0.13',
     author='Jay Unruh',
     description='A plugin to read and write ImageJ roi files into a napari shapes or points layer.',
     url='https://github.com/jayunruh/napari_jroitools',
@@ -20,7 +20,7 @@ setup(
     packages=find_packages(),
     python_requires='>=3.6',
     install_requires=["napari_plugin_engine>=0.1.4","numpy","numba"],
-    py_modules=['napari_jroireader','importroi','napari_jroiwriter','exportroi','profiler','writepw','importpw'],
+    py_modules=['napari_jroireader','importroi','napari_jroiwriter','exportroi','imgprofiler','writepw','importpw'],
     entry_points={
         'napari.plugin': [
             'napari_jroireader = napari_jroireader',
