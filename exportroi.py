@@ -81,8 +81,8 @@ class RoiEncoder():
         writeString(barr,0,'Iout')
         writeMotorolaShort(barr,roiDecoder.VERSION_OFFSET,self.VERSION)
         writeByte(barr,roiDecoder.TYPE,[rtype])
-        writeMotorolaShort(barr,roiDecoder.VERSION_OFFSET,self.VERSION)
-        writeMotorolaShort(barr,roiDecoder.TOP,[r[0],r[1],r[0]+r[2],r[1]+r[3]])
+        #writeMotorolaShort(barr,roiDecoder.VERSION_OFFSET,self.VERSION)
+        writeMotorolaShort(barr,roiDecoder.TOP,[r[1],r[0],r[1]+r[3]-1,r[0]+r[2]-1])
         if(self.subPixelResolution and (rtype==self.rect or rtype==self.oval)):
             if(len(roi.xcoords)==4):
                 writeMotorolaFloat(barr,roiDecoder.XD,[roi.xcoords[0],roi.ycoords[0],r[0]+r[2],r[1]+r[3]])

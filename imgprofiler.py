@@ -167,8 +167,9 @@ def triangleContains(triangle,point):
 @jit(nopython=True)
 def rectContains(rect,point):
     return triangleContains([rect[0],rect[1],rect[2]],point) or triangleContains([rect[2],rect[3],rect[0]],point)
-    
+
 #copy of the contains code from ImageJ FloatPolygon: https://imagej.nih.gov/ij/developer/source/ij/process/FloatPolygon.java.html
+#original code was from c program written by W. Randolph Franklin
 @jit(nopython=True)
 def polyContains(polygon,point):
     inside=False

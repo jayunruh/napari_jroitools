@@ -113,9 +113,9 @@ class RoiDecoder():
         print('subtype:'+str(subtype))
         top,left,bottom,right=readmotorolashort(barr,self.TOP,4)
         print('bounds:')
-        print([top,left,bottom,right])
-        width=right-left
-        height=bottom-top
+        print([left,top,right-left+1,top-bottom+1])
+        width=right-left+1
+        height=bottom-top+1
         ncoords=readmotorolashort(barr,self.N_COORDINATES,1)[0]
         if ncoords==0:
             ncoords=readmotorolaint(barr,self.SIZE,1)[0]
@@ -343,8 +343,8 @@ class Roi():
     def getBounds(self):
         x0=min(self.xcoords)
         y0=min(self.ycoords)
-        width=max(self.xcoords)-x0
-        height=max(self.ycoords)-y0
+        width=max(self.xcoords)-x0+1
+        height=max(self.ycoords)-y0+1
         return np.array([x0,y0,width,height])
     
     def getSubPixelResolution(self):
@@ -353,15 +353,6 @@ class Roi():
         rem=np.sum(residx**2)
         rem=rem+np.sum(residy**2)
         return rem>1.0e-6
-        
-    def getBounds(self):
-        x=min(self.xcoords)
-        y=min(self.ycoords)
-        xmax=max(self.xcoords)
-        ymax=max(self.ycoords)
-        width=xmax-x
-        height=ymax-y
-        return [x,y,width,height]
         
     def getStandardName(self):
         r=self.getBounds()

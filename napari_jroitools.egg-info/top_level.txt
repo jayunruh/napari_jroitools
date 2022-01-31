@@ -1,5 +1,7 @@
 exportroi
+imgprofiler
+importpw
 importroi
 napari_jroireader
 napari_jroiwriter
-profiler
+writepw
